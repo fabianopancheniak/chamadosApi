@@ -65,7 +65,7 @@ router.post('/create',  async (req,res) => {
 });
 
 
-router.put('/update/:id',  async (req,res) => {
+router.put('/update/:id',auth, async (req,res) => {
     const { nome, login, fone, email, senha, tipo_conta, unidade, setor } = req.body;
         if (!nome || !login || !fone || !email || !senha || !tipo_conta || !unidade || !setor)
         return res.send({ error: 'Verifique se todos os campos obrigatórios foram informados! '});
@@ -86,7 +86,7 @@ router.put('/update/:id',  async (req,res) => {
 });
 
 
-router.delete('/delete/:id',  async (req,res) => {
+router.delete('/delete/:id',auth,  async (req,res) => {
     try {
         await Users.findByIdAndDelete(req.params.id);
         return res.send({ error: 'Usuário removido com sucesso!' });
